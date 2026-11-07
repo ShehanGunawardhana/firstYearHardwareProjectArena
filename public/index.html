@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STEEL CLASH ARENA | VOLTER PRIME VS TURBO OD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="modern-arena">
+
+  <!-- DYNAMIC AMBIENT BACKDROP LIGHTS -->
+  <div class="mesh-bg"></div>
+  <div class="ambient-sphere sphere-volter"></div>
+  <div class="ambient-sphere sphere-turbo"></div>
+
+  <!-- IMPACT SHAKE CONTAINER -->
+  <div id="impactWrapper" class="arena-shell">
+
+    <!-- SLEEK TOP NAVBAR -->
+    <header class="modern-nav">
+      <div class="nav-left">
+        <div class="live-status-pill">
+          <span class="live-pulse-dot"></span>
+          <span class="live-status-text">LIVE ARENA BATTLE</span>
+        </div>
+        <div class="timer-pill">
+          <span class="timer-icon">⏱</span>
+          <span id="matchTimer" class="timer-value">00:00</span>
+        </div>
+      </div>
+
+      <div class="nav-brand">
+        <span class="brand-accent">STEEL</span>CLASH
+        <span class="brand-sub">CHAMPIONSHIP</span>
+      </div>
+
+      <div class="nav-right">
+        <!-- MATCH HISTORY BUTTON -->
+        <button id="historyToggleBtn" class="nav-action-pill history-nav-btn" title="View Match History">
+          <span>📜</span> HISTORY (<span id="historyNavCount">0</span>)
+        </button>
+
+        <!-- WIRELESS WI-FI STATUS PILL -->
+        <div class="hardware-pill wireless-pill" id="wirelessStatusBox" title="Robot Wi-Fi Link Status">
+          <span class="hardware-led wifi-led" id="wifiStatusDot"></span>
+          <span id="wifiStatusText">WI-FI STANDBY</span>
+        </div>
+
+        <!-- HARDWARE PORT PILL -->
+        <div class="hardware-pill" id="portStatusBox">
+          <span class="hardware-led" id="statusDot"></span>
+          <span id="portStatusText">COM10 ONLINE</span>
+        </div>
+
+        <!-- SENSITIVITY MODAL TRIGGER -->
+        <button id="configToggleBtn" class="nav-action-pill" title="Hardware & Sensitivity Calibration">
+          <span>⚡</span> SENSITIVITY
+        </button>
+
+        <!-- SOUND TOGGLE -->
+        <button id="soundToggleBtn" class="nav-action-pill" title="Toggle Combat SFX">
+          <span id="soundIcon">🔊</span> SFX
+        </button>
+
+        <!-- FULLSCREEN BUTTON -->
+        <button id="fullscreenBtn" class="nav-action-pill" title="Fullscreen Arena">
+          <span>⛶</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN BATTLE STAGE -->
+    <main class="arena-grid">
+
+      <!-- ============================================== -->
+      <!-- VOLTER PRIME (DEFENDER - 30 LIVES - FLIPPER)   -->
+      <!-- ============================================== -->
+      <section class="fighter-panel volter-panel" id="volterCard">
+        <div class="panel-glow-fx"></div>
+
+        <div class="fighter-top">
+          <div class="fighter-tag-row">
+            <span class="badge-role volter-badge">DEFENDER • BOT 01</span>
+            <span class="badge-status" id="volterStatusBadge">OPERATIONAL</span>
+          </div>
+          <h1 class="fighter-headline volter-gradient-text">VOLTER PRIME</h1>
+          <div class="weapon-chip volter-chip">
+            <span class="chip-icon">⚡</span>
+            <span>HYDRAULIC FLIPPER</span>
+          </div>
+        </div>
+
+        <!-- MASSIVE CLEAN HEALTH READOUT -->
+        <div class="health-hero-card">
+          <div class="health-meta-row">
+            <span class="health-hero-label">ARMOR INTEGRITY</span>
+            <span class="hit-indicator-pill" id="damageReductionPill">-1 HIT</span>
+          </div>
+
+          <div class="health-number-row">
+            <span class="huge-lives-counter volter-text" id="volterLivesDisplay">30</span>
+            <div class="lives-label-group">
+              <span class="lives-max-label">/ 30</span>
+              <span class="lives-subtext">LIVES LEFT</span>
+            </div>
+          </div>
+
+          <!-- SMOOTH PROGRESS TRACK -->
+          <div class="modern-progress-track">
+            <div class="modern-progress-fill volter-progress-fill" id="volterHealthBar" style="width: 100%;"></div>
+          </div>
+
+          <!-- 30-NODE MICRO SEGMENTS MATRIX -->
+          <div class="vital-segments-row" id="lifeNodesMatrix">
+            <!-- 30 micro-segments generated via JS -->
+          </div>
+        </div>
+
+        <!-- FIGHTER AVATAR VISUAL -->
+        <div class="fighter-visual-wrap">
+          <div class="avatar-ring volter-avatar-ring"></div>
+          <div class="avatar-mech volter-mech">
+            <svg viewBox="0 0 160 140" class="modern-mech-svg">
+              <polygon points="80,15 130,40 145,95 110,130 50,130 15,95 30,40" fill="#121826" stroke="#ff385c" stroke-width="2.5"/>
+              <polygon id="flipperArm" points="65,10 95,10 108,55 52,55" fill="url(#volterModernGrad)"/>
+              <circle cx="80" cy="90" r="18" fill="#0c101a" stroke="#ff6b35" stroke-width="2"/>
+              <circle cx="80" cy="90" r="10" fill="#ff385c" class="core-pulsing"/>
+              <defs>
+                <linearGradient id="volterModernGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ff6b35"/>
+                  <stop offset="100%" stop-color="#ff385c"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        <!-- FAN VOTING & VOTER NAMES -->
+        <div class="fighter-footer">
+          <div class="vote-stat-line">
+            <span class="vote-stat-label">CROWD SUPPORT</span>
+            <span class="vote-stat-num volter-text" id="volterVoteCount">0</span>
+          </div>
+          <button id="voteVolterBtn" class="modern-vote-btn volter-btn">
+            <span>⚡</span> VOTE VOLTER PRIME
+          </button>
+          
+          <!-- VOTER NAMES LIST -->
+          <div class="voters-roster">
+            <span class="roster-label">VOTED BY:</span>
+            <div class="roster-chips-wrap" id="volterVotersList">
+              <span class="no-voters-msg">No votes yet</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================== -->
+      <!-- CENTER: ARENA CORE, OSCILLOSCOPE, VOTE POOL    -->
+      <!-- ============================================== -->
+      <section class="arena-center-stage">
+
+        <!-- VS HEADER BADGE -->
+        <div class="modern-vs-wrap">
+          <span class="vs-line"></span>
+          <span class="modern-vs-pill">VS ARENA</span>
+          <span class="vs-line"></span>
+        </div>
+
+        <!-- OSCILLOSCOPE & SENSOR TELEMETRY -->
+        <div class="modern-scope-panel">
+          <div class="scope-header">
+            <div class="scope-title-group">
+              <span class="radar-dot"></span>
+              <span class="scope-title">HIGH-SPEED PIEZO OSCILLOSCOPE (GPIO 34)</span>
+            </div>
+            <div class="scope-stats-chips">
+              <span class="stat-badge freq-badge">⚡ <strong id="liveFrequency">0</strong>/s</span>
+              <span class="stat-badge">ADC: <strong id="liveAdcText">0</strong></span>
+              <span class="stat-badge peak-badge">PEAK: <strong id="highestImpactDisplay">0</strong></span>
+            </div>
+          </div>
+
+          <!-- OSCILLOSCOPE CANVAS -->
+          <div class="modern-canvas-container">
+            <canvas id="scopeCanvas" width="480" height="130"></canvas>
+            <div class="threshold-line-tag" id="thresholdMarkerTag">TH: 850</div>
+            <div class="crit-threshold-tag" id="critMarkerTag">CRIT: 1600</div>
+            <div class="canvas-impact-flash" id="impactFlashOverlay"></div>
+          </div>
+
+          <!-- SENSITIVITY PRESETS STRIP -->
+          <div class="sensitivity-quick-strip">
+            <span class="quick-strip-label">SENSITIVITY:</span>
+            <button class="sens-btn active" data-sens="850" data-crit="1600">🔥 BALANCED (850 / 1600)</button>
+            <button class="sens-btn" data-sens="750" data-crit="1400">⚡ SENSITIVE (750 / 1400)</button>
+            <button class="sens-btn" data-sens="1100" data-crit="2200">🛡️ FIRM (1100 / 2200)</button>
+          </div>
+
+          <!-- LIVE STATUS TICKER -->
+          <div class="scope-status-footer" id="impactStatusBar">
+            <span class="status-icon" id="impactIcon">⚡</span>
+            <span id="impactStatusText">SAMPLING SENSOR AT 20,000+ READS/SEC...</span>
+          </div>
+        </div>
+
+        <!-- FAN VOTES POOL (10 VOTES MAX WITH VOTER NAME INPUT) -->
+        <div class="modern-vote-pool-panel">
+          <div class="vote-pool-header">
+            <div class="pool-title-wrap">
+              <span class="pool-title">FAN VOTE ARENA</span>
+              <span class="pool-badge">(10 VOTES POOL)</span>
+            </div>
+            <div class="pool-remaining-tag">
+              <span id="votesRemainingText">10</span> VOTES LEFT
+            </div>
+          </div>
+
+          <!-- VOTER NAME INPUT BAR -->
+          <div class="voter-name-input-bar">
+            <span class="name-input-icon">👤</span>
+            <input type="text" id="voterNameInput" class="voter-name-field" placeholder="Enter your name to cast vote..." maxlength="20">
+          </div>
+
+          <!-- 10 VOTE TOKENS ROW -->
+          <div class="vote-tokens-row" id="votePipsRow">
+            <!-- 10 tokens generated in JS -->
+          </div>
+
+          <!-- MODERN PERCENTAGE BAR -->
+          <div class="modern-ratio-bar">
+            <div class="ratio-segment volter-ratio" id="volterHypeBar" style="width: 50%;">
+              <span id="volterHypePercent">50%</span>
+            </div>
+            <div class="ratio-segment turbo-ratio" id="turboHypeBar" style="width: 50%;">
+              <span id="turboHypePercent">50%</span>
+            </div>
+          </div>
+
+          <div class="ratio-sub-labels">
+            <span class="volter-sub-label">VOLTER PRIME</span>
+            <button id="resetVotesBtn" class="clean-reset-btn">RESET VOTES</button>
+            <span class="turbo-sub-label">TURBO OD</span>
+          </div>
+        </div>
+
+        <!-- DUAL DAMAGE SIMULATION TOOLS -->
+        <div class="quick-tools-grid">
+          <button id="testStrikeBtn" class="tool-btn strike-tool" title="Simulate Small Damage (-1 HP)">
+            🔨 Small Hit (-1)
+          </button>
+          <button id="testCritBtn" class="tool-btn crit-tool" title="Simulate Critical Crush (-3 HP)">
+            💥 Critical (-3)
+          </button>
+          <button id="resetMatchBtn" class="tool-btn reset-tool" title="Restore 30 Lives">
+            🔄 Reset 30 HP
+          </button>
+        </div>
+
+        <!-- AUDIT COMBAT FEED -->
+        <div class="modern-log-panel">
+          <div class="log-top-bar">
+            <span>LIVE BATTLE FEED</span>
+            <span class="clear-btn" id="clearLogBtn">CLEAR</span>
+          </div>
+          <div class="log-scroll-area" id="combatLogList">
+            <div class="log-entry system-entry">
+              <span class="log-time">[BOOT]</span>
+              <span class="log-msg">Arena link active. Dual Damage (Small & Critical) enabled.</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ============================================== -->
+      <!-- TURBO OD (ATTACKER - BLUE - KINETIC HAMMER)    -->
+      <!-- ============================================== -->
+      <section class="fighter-panel turbo-panel" id="turboCard">
+        <div class="panel-glow-fx turbo-glow-fx"></div>
+
+        <div class="fighter-top">
+          <div class="fighter-tag-row">
+            <span class="badge-role turbo-badge">ATTACKER • BOT 02</span>
+            <span class="badge-status turbo-status" id="turboStatusBadge">HAMMER CHARGED</span>
+          </div>
+          <h1 class="fighter-headline turbo-gradient-text">TURBO OD</h1>
+          <div class="weapon-chip turbo-chip">
+            <span class="chip-icon">🔨</span>
+            <span>KINETIC HAMMER</span>
+          </div>
+        </div>
+
+        <!-- DUAL DAMAGE STRIKE METRICS -->
+        <div class="turbo-stat-cards-column">
+          <div class="stat-glass-card">
+            <span class="card-metric-val turbo-text" id="smallSmashCount">0</span>
+            <span class="card-metric-label">SMALL HITS (-1)</span>
+          </div>
+          <div class="stat-glass-card">
+            <span class="card-metric-val crit-metric-text" id="critSmashCount">0</span>
+            <span class="card-metric-label">CRIT CRUSH (-3)</span>
+          </div>
+          <div class="stat-glass-card">
+            <span class="card-metric-val turbo-text" id="totalSmashCount">0</span>
+            <span class="card-metric-label">TOTAL HITS</span>
+          </div>
+        </div>
+
+        <!-- TURBO AVATAR VISUAL -->
+        <div class="fighter-visual-wrap turbo-visual-wrap">
+          <div class="avatar-ring turbo-avatar-ring"></div>
+          <div class="avatar-mech turbo-mech">
+            <svg viewBox="0 0 160 140" class="modern-mech-svg">
+              <polygon points="80,20 135,45 145,100 115,128 45,128 15,100 25,45" fill="#0d1424" stroke="#00f0ff" stroke-width="2.5"/>
+              <g id="hammerWeaponArm">
+                <line x1="80" y1="75" x2="125" y2="25" stroke="#00f0ff" stroke-width="6" stroke-linecap="round"/>
+                <polygon points="112,12 140,12 140,36 112,36" fill="url(#turboModernGrad)"/>
+                <rect x="108" y="18" width="36" height="12" fill="#ffffff" opacity="0.9"/>
+              </g>
+              <polygon points="50,65 110,65 100,82 60,82" fill="#00f0ff" opacity="0.9"/>
+              <defs>
+                <linearGradient id="turboModernGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#00f0ff"/>
+                  <stop offset="100%" stop-color="#0066ff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+
+        <!-- FAN VOTING & VOTER NAMES -->
+        <div class="fighter-footer">
+          <div class="vote-stat-line">
+            <span class="vote-stat-label">CROWD SUPPORT</span>
+            <span class="vote-stat-num turbo-text" id="turboVoteCount">0</span>
+          </div>
+          <button id="voteTurboBtn" class="modern-vote-btn turbo-btn">
+            <span>🔨</span> VOTE TURBO OD
+          </button>
+
+          <!-- VOTER NAMES LIST -->
+          <div class="voters-roster">
+            <span class="roster-label">VOTED BY:</span>
+            <div class="roster-chips-wrap" id="turboVotersList">
+              <span class="no-voters-msg">No votes yet</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div><!-- /impactWrapper -->
+
+  <!-- ============================================== -->
+  <!-- MATCH HISTORY MODAL / DRAWER                   -->
+  <!-- ============================================== -->
+  <div id="historyModal" class="modern-modal-overlay">
+    <div class="modern-history-dialog">
+      <div class="dialog-header">
+        <div class="dialog-title-wrap">
+          <span class="dialog-icon">📜</span>
+          <h3>MATCH COMBAT HISTORY</h3>
+        </div>
+        <div class="dialog-header-actions">
+          <button id="clearHistoryBtn" class="clear-history-btn">Clear History</button>
+          <button id="closeHistoryBtn" class="dialog-close">&times;</button>
+        </div>
+      </div>
+
+      <div class="history-list-container" id="historyListContainer">
+        <div class="empty-history-msg">No past matches recorded yet. Fight to create history!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODERN GAME OVER / DEFEAT MODAL                -->
+  <!-- ============================================== -->
+  <div id="gameOverModal" class="modern-modal-overlay">
+    <div class="modern-defeat-card">
+      <div class="defeat-badge">CRITICAL SYSTEM FAILURE</div>
+      <h2 class="defeat-title">VOLTER PRIME DESTROYED</h2>
+      <p class="defeat-subtitle">All 30 armor vital nodes extinguished under kinetic hammer impact.</p>
+
+      <div class="victor-banner">
+        <span class="trophy-icon">🏆</span>
+        <div class="victor-info">
+          <span class="victor-tag">ARENA CHAMPION</span>
+          <span class="victor-bot-name turbo-text">TURBO OD WINS!</span>
+        </div>
+      </div>
+
+      <div class="match-recap-grid">
+        <div class="recap-chip">
+          <span class="recap-val" id="modalStrikes">0</span>
+          <span class="recap-lbl">STRIKES LANDED</span>
+        </div>
+        <div class="recap-chip">
+          <span class="recap-val" id="modalTime">00:00</span>
+          <span class="recap-lbl">BATTLE DURATION</span>
+        </div>
+        <div class="recap-chip">
+          <span class="recap-val" id="modalFav">-</span>
+          <span class="recap-lbl">FAN FAVORITE</span>
+        </div>
+      </div>
+
+      <button id="rematchBtn" class="modern-rematch-btn">
+        ⚔️ INITIATE REMATCH (RESTORE 30 LIVES)
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- HARDWARE & SENSITIVITY CALIBRATION MODAL       -->
+  <!-- ============================================== -->
+  <div id="configModal" class="modern-modal-overlay">
+    <div class="modern-config-dialog">
+      <div class="dialog-header">
+        <h3>⚡ HARDWARE & SENSOR TUNING</h3>
+        <button id="closeConfigBtn" class="dialog-close">&times;</button>
+      </div>
+
+      <div class="dialog-content">
+        <!-- TRIGGER THRESHOLD SLIDERS -->
+        <div class="config-card">
+          <div class="config-card-header">
+            <span class="config-label">Small Damage Trigger (-1 HP):</span>
+            <span class="config-val-pill"><strong id="threshValueLabel">850</strong> ADC</span>
+          </div>
+          <input type="range" id="threshSlider" min="500" max="1500" step="25" value="850" class="modern-slider">
+          <div class="slider-hint-row">
+            <span>⚡ Sensitive (750)</span>
+            <span>🔥 Balanced (850)</span>
+            <span>🛡️ Firm (1100+)</span>
+          </div>
+          <small class="hint-text">Resting noise is ~440 ADC. Value 850 requires a clean armor strike.</small>
+        </div>
+
+        <div class="config-card">
+          <div class="config-card-header">
+            <span class="config-label">Critical Smash Trigger (-3 HP):</span>
+            <span class="config-val-pill"><strong id="critValueLabel">1600</strong> ADC</span>
+          </div>
+          <input type="range" id="critSlider" min="1000" max="3500" step="50" value="1600" class="modern-slider crit-accent">
+          <div class="slider-hint-row">
+            <span>Moderate (1400)</span>
+            <span>Crushing Blow (1600)</span>
+            <span>Devastating Smash (2200+)</span>
+          </div>
+        </div>
+
+        <!-- ROBOT WIRELESS WI-FI CONFIG CARD -->
+        <div class="config-card">
+          <label class="config-label">📡 Robot Wireless Wi-Fi Link (No Cables Needed!):</label>
+          <div class="wifi-instructions-box" style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.85rem;">
+              <span style="color: var(--text-muted);">Hotspot SSID:</span>
+              <strong style="color: var(--turbo-cyan); font-family: monospace;">VOLTER_PRIME_ARENA</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.85rem;">
+              <span style="color: var(--text-muted);">Password:</span>
+              <strong style="color: #fff; font-family: monospace;">volter1234</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.85rem;">
+              <span style="color: var(--text-muted);">Robot IP:</span>
+              <strong style="color: #fff; font-family: monospace;">192.168.4.1</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+              <span style="color: var(--text-muted);">UDP Telemetry Port:</span>
+              <strong style="color: var(--turbo-cyan); font-family: monospace;">41234</strong>
+            </div>
+          </div>
+          <small class="hint-text">1. Connect laptop Wi-Fi to <strong>VOLTER_PRIME_ARENA</strong> (Password: <strong>volter1234</strong>).<br>2. Open <strong>http://localhost:3000</strong> — telemetry streams wirelessly with &lt;1ms latency!</small>
+        </div>
+
+        <!-- PORT & BAUD SETTING -->
+        <div class="config-card">
+          <label class="config-label">Target Port & Baud Rate:</label>
+          <div class="port-input-row" style="margin-bottom: 8px;">
+            <input type="text" id="portInput" value="COM10" class="modern-input" placeholder="e.g. COM10">
+            <button id="applyPortBtn" class="modern-apply-btn">Connect</button>
+          </div>
+          <div class="baud-toggle-row">
+            <button class="baud-btn" data-baud="9600" id="baud9600Btn">9600 BAUD</button>
+            <button class="baud-btn active" data-baud="115200" id="baud115200Btn">⚡ 115200 BAUD (HIGH SPEED)</button>
+          </div>
+          <small class="hint-text">115200 BAUD enables 100+ reads/sec with ultra-low latency.</small>
+        </div>
+
+        <!-- BROWSER WEB SERIAL DIRECT LINK -->
+        <div class="config-card">
+          <label class="config-label">Browser Direct Web Serial:</label>
+          <button id="webSerialConnectBtn" class="modern-web-serial-btn">
+            🔌 Direct Link via Chrome / Edge Web Serial
+          </button>
+          <small class="hint-text">Allows the browser to read COM10 directly without backend serial.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
